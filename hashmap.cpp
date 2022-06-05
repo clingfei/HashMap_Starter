@@ -258,5 +258,35 @@ std::ostream& operator<<(std::ostream& os, const HashMap<K, M, H>& rhs){
 }
 
 /* Begin Milestone 2: Special Member Functions */
+template <typename K, typename M, typename H>
+HashMap<K, M, H>::HashMap(const HashMap<K, M, H>& other) {
+    for (auto [key, value] : other) {
+        insert({key, value});
+    }
+}
 
+template <typename K, typename M, typename H>
+HashMap<K, M, H> & HashMap<K, M, H>::operator=(const HashMap<K, M, H> & other) {
+    if (&rhs == this) return *this;
+    clear();
+    for (auto [key, value] : other) {
+        insert({key, value});
+    }
+    return *this;
+}
+
+template <typename K, typename M, typename H>
+HashMap<K, M, H>::HashMap(HashMap<K, M, H>&& other) {
+    this->_buckets_array = std::move(other._buckets_array);
+    this->_size = other.size();
+    this->_hash_function = other._hash_function;
+}
+
+template <typename K, typename M, typename H>
+HashMap<K, M, H> & HashMap<K, M, H>::operator=(HashMap<K, M, H> &&other) {
+    this->_buckets_array = std::move(other._buckets_array);
+    this->_size = other.size();
+    this->_hash_function = other._hash_function;
+    return *this;
+}
 /* end student code */
