@@ -259,15 +259,15 @@ std::ostream& operator<<(std::ostream& os, const HashMap<K, M, H>& rhs){
 
 /* Begin Milestone 2: Special Member Functions */
 template <typename K, typename M, typename H>
-HashMap<K, M, H>::HashMap(const HashMap<K, M, H>& other) {
-    for (auto [key, value] : other) {
+HashMap<K, M, H>::HashMap(const HashMap& rhs) : HashMap(rhs.bucket_count(), rhs._hash_function) {
+    for (auto [key, value] : rhs) {
         insert({key, value});
     }
 }
 
 template <typename K, typename M, typename H>
 HashMap<K, M, H> & HashMap<K, M, H>::operator=(const HashMap<K, M, H> & other) {
-    if (&rhs == this) return *this;
+    if (&other == this) return *this;
     clear();
     for (auto [key, value] : other) {
         insert({key, value});
