@@ -164,7 +164,7 @@ private:
      * through the HashMap's interface.
      */
     HashMapIterator(bucket_array_type* buckets_array, node* node, size_t bucket);
-
+//buckets_array实质是链表，其中存放的数据类型是node
 };
 
 
